@@ -22,12 +22,14 @@ FROM alpine:latest
 # Set the Current Working Directory inside the container
 WORKDIR /root/
 
-# Copy the Pre-built binary file and the .env file from the previous stage
+# Build argument to determine if we should include .env
+ARG INCLUDE_ENV=false
+
+# Conditionally copy the .env file
 COPY --from=builder /app/main .
-ARG DB_HOST
-ARG DB_USER
-ARG DB_PASSWORD
-ARG DB_NAME
+
+# Only copy the .env file if INCLUDE_ENV is true
+COPY --from=builder /app/.env .env
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
