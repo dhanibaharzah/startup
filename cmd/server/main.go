@@ -5,6 +5,7 @@ import (
 	"startup/internal/config"
 	"startup/internal/database"
 	"startup/internal/router"
+	"startup/internal/user"
 
 	"github.com/joho/godotenv"
 )
@@ -24,7 +25,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
-	defer db.Close()
+
+	// Auto-migrate User model
+	err = db.AutoMigrate(&user.User{})
+	if err != nil {
+		log.Fatalf("Failed to migrate database: %v", err)
+	}
 
 	// Initialize and start the router
 	r := router.InitRouter()
