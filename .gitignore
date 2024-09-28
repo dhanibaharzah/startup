@@ -1,5 +1,5 @@
 # Ignore the .env file containing sensitive credentials
-.env
+**/*.env
 
 # Binaries for programs and plugins
 *.exe
