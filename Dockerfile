@@ -24,7 +24,7 @@ WORKDIR /root/
 
 # Copy the Pre-built binary file and the .env file from the previous stage
 COPY --from=builder /app/main .
-COPY --from=builder /app/.env .
+# COPY --from=builder /app/.env . | removed because no need in flyio
 
 # Copy the Pre-built binary file from the previous stage
 COPY --from=builder /app/main .
