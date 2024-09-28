@@ -1,0 +1,42 @@
+# flyctl launch added from .gitignore
+# Ignore the .env file containing sensitive credentials
+
+# Binaries for programs and plugins
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+
+# Output of the build process
+build
+**/*.o
+**/*.a
+**/*.out
+
+# Vendor directory (if you're using vendoring)
+**/vendor
+
+# Ignore IDE/editor specific files
+**/.vscode
+**/.idea
+**/*.iml
+
+# Ignore logs
+**/*.log
+
+# Ignore Golang's coverage files
+**/*.cover
+**/coverage.out
+
+# Ignore database migrations lock file
+**/*.db.lock
+
+# Ignore node_modules (if using Node.js in the project)
+**/node_modules
+
+# Ignore MacOS system files
+**/.DS_Store
+
+# Ignore Go binaries
+**/startup
+fly.toml
