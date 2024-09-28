@@ -13,23 +13,18 @@ RUN go mod download
 # Copy the source code into the container
 COPY . .
 
-# Build the Go app
-RUN go build -o main cmd/server/main.go
+# Build the Go app with static linking
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main cmd/server/main.go
 
 # Start a new stage from scratch
-FROM alpine:latest  
+FROM scratch
 
 # Set the Current Working Directory inside the container
 WORKDIR /root/
 
-# Build argument to determine if we should include .env
-ARG INCLUDE_ENV=false
-
-# Conditionally copy the .env file
+# Copy the Pre-built binary file from the previous stage
 COPY --from=builder /app/main .
-
-# Only copy the .env file if INCLUDE_ENV is true
-COPY --from=builder /app/.env .env
+COPY --from=builder /app/.env .
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
