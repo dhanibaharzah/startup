@@ -24,16 +24,10 @@ WORKDIR /root/
 
 # Copy the Pre-built binary file and the .env file from the previous stage
 COPY --from=builder /app/main .
-
-# env var
-ARG DB_DSN
 ARG DB_HOST
 ARG DB_USER
 ARG DB_PASSWORD
 ARG DB_NAME
-
-# Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/main .
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
